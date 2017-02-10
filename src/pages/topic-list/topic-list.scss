@@ -1,0 +1,50 @@
+page-topic-list{
+  .list{
+    ion-item{
+      align-items: flex-start;
+      ion-label{
+        white-space: normal;
+        .title{
+          color: $black;
+          font-size: 16px;
+          margin: 10px 0;
+        }
+        .name{
+          color: $black;
+          font-size: 18px;
+        }
+        .time{
+          color: $gray;
+          font-size: 14px;
+        }
+        .info{
+          display: flex;
+          justify-content: space-between;
+          ion-badge{
+            width: 50px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 0px;
+            font-size: 12px;
+            font-weight: normal;
+            padding: 0;
+          }
+        }
+        .mata{
+          font-size: 12px;
+          color: #cccccc;
+          & > span{
+            margin-right: 10px;
+          }
+          ion-icon{
+            margin-right: 6px;
+            margin-top: 1px;
+          }
+          ion-icon, span{
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}

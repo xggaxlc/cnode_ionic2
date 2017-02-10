@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title (click)="scrollToTop()">{{title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navToProfilePage()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content #content>
+
+  <ion-refresher (ionRefresh)="refresh($event)" [pullMin]="60" [pullMax]="200">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="下拉刷新..."
+      refreshingSpinner="bubbles"
+      refreshingText="正在刷新..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list class="list" padding>
+    <ion-item *ngFor="let item of topicList" (click)="navToDetailPage(item)">
+      <ion-avatar item-left>
+        <img src="{{item.author.avatar_url | protocol}}">
+      </ion-avatar>
+      <div class="info">
+        <h2 class="name">{{item.author.loginname}}</h2>
+        <ion-badge color="primary" *ngIf="item.top">置顶</ion-badge>
+        <ion-badge color="danger" *ngIf="item.good">精华</ion-badge>
+      </div>
+      <p class="time">{{item.create_at}}</p>
+      <h3 class="title">{{item.title}}</h3>
+      <p class="mata">
+        <span><ion-icon name="eye"></ion-icon><span>{{item.visit_count}}</span></span>
+        <span><ion-icon name="chatbubbles"></ion-icon><span>{{item.reply_count}}</span></span>
+      </p>
+    </ion-item>
+  </ion-list>
+  
+  <div class="loadmore" *ngIf="onOff.loadMoreByUser" (click)="loadMore()">加载更多</div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [hidden]="onOff.loadMoreByUser || !onOff.canLoadMore" [enabled]="onOff.canLoadMore">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

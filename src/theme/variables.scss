@@ -1,0 +1,93 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+$font-path: "../assets/fonts";
+
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$primary:  #42bd56;
+$secondary: #9290e8;
+$danger: #ffac2d;
+$gray: #9b9b9b;
+$black: #494949;
+
+$colors: (
+  primary:    #42bd56,
+  secondary:  #9290e8,
+  danger:     #ffac2d
+);
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+$item-md-padding-left: 0;
+$list-md-border-color: #e4e4e4;
+$list-md-margin-top: 0;
+$list-md-margin-bottom: 0;
+$item-md-avatar-size: 50px;
+.item-md.item-block .item-inner{
+  padding-right: 0px !important;
+}
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+$refresher-icon-color: $primary;
+$refresher-text-color: $primary;
+$infinite-scroll-loading-color: #494949;
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import "ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
+
+
+// css
+@import "../assets/css/github-markdown";

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title (click)="scrollToTop()">主题详情</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="scrollToReply()">
+        <ion-icon name="chatboxes"></ion-icon>
+        <ion-badge>{{topic.reply_count}}</ion-badge>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content #content>
+  <div class="topic" padding>
+    <h2 class="title">{{topic.title}}</h2>
+    <div class="mata">
+      <img src="{{topic.author.avatar_url | protocol}}">
+      <div class="info">
+        <p class="name">{{topic.author.loginname}}</p>
+        <p>{{topic.create_at}}</p>
+      </div>
+    </div>
+    <div class="markdown-body" [innerHTML]="topic.content | link"></div>
+  </div>
+  <div class="reply" #reply>
+    <div class="title" padding>回复&nbsp;{{topic.reply_count}}</div>
+    <ion-list class="list">
+      <ion-item *ngFor="let item of topic.replies" padding>
+        <div class="header">
+          <ion-avatar item-left>
+            <img src="{{item.author.avatar_url | protocol}}">
+          </ion-avatar>
+          <div class="info">
+            <p class="name">{{item.author.loginname}}</p>
+            <p class="time">{{item.create_at}}</p>
+          </div>
+        </div>
+        <div class="body">
+          <div class="markdown-body" [innerHTML]="item.content | link"></div>
+          <p class="mata">
+            <span><ion-icon name="eye"></ion-icon><span>{{item.ups.length}}</span></span>
+            <span><ion-icon name="chatbubbles"></ion-icon><span>{{item.reply_id}}</span></span>
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <button ion-button icon-left clear>
+    <ion-icon name="heart-outline"></ion-icon>
+    收藏
+  </button>
+  <button ion-button icon-left clear>
+    <ion-icon name="chatboxes"></ion-icon>
+    回复
+  </button>
+</ion-footer>
