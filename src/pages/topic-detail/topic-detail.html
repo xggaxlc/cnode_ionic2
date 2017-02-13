@@ -24,25 +24,30 @@
     </div>
     <div class="markdown-body" [innerHTML]="topic.content | link"></div>
   </div>
-  <div class="reply" #reply>
+  <div class="spinner-box" *ngIf="spinner">
+    <ion-spinner color="primary"></ion-spinner>
+    <p>加载中...</p>
+  </div>
+  <div class="reply" #reply [hidden]="!topic.reply_count || !topic.replies">
     <div class="title" padding>回复&nbsp;{{topic.reply_count}}</div>
     <ion-list class="list">
       <ion-item *ngFor="let item of topic.replies" padding>
         <div class="header">
-          <ion-avatar item-left>
-            <img src="{{item.author.avatar_url | protocol}}">
-          </ion-avatar>
-          <div class="info">
-            <p class="name">{{item.author.loginname}}</p>
-            <p class="time">{{item.create_at}}</p>
+          <div class="left">
+            <ion-avatar item-left>
+              <img src="{{item.author.avatar_url | protocol}}">
+            </ion-avatar>
+            <div class="info">
+              <p class="name">{{item.author.loginname}}</p>
+              <p class="time">{{item.create_at}}</p>
+            </div>
+          </div>
+          <div class="right" [hidden]="!item.ups.length">
+            <ion-icon name="thumbs-up"></ion-icon><span>{{item.ups.length}}</span>
           </div>
         </div>
         <div class="body">
           <div class="markdown-body" [innerHTML]="item.content | link"></div>
-          <p class="mata">
-            <span><ion-icon name="eye"></ion-icon><span>{{item.ups.length}}</span></span>
-            <span><ion-icon name="chatbubbles"></ion-icon><span>{{item.reply_id}}</span></span>
-          </p>
         </div>
       </ion-item>
     </ion-list>

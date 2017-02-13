@@ -11,6 +11,7 @@ export class TopicDetailPage {
   @ViewChild('reply') reply: ElementRef;
   
   topic: any = this.navParams.get('topic');
+  spinner: boolean = false;
 
   constructor(
     private navCtrl: NavController,
@@ -20,11 +21,7 @@ export class TopicDetailPage {
   ) {}
 
   ionViewDidLoad() {
-    console.log(this.navParams.get('topic'))
-    // this.fetchTopic({
-    //   refresh: true,
-    //   loadingMessage: '加载中...'
-    // });
+    console.log(this.topic)
     this.fetchTopic();
   }
 
@@ -38,11 +35,12 @@ export class TopicDetailPage {
   }
 
   fetchTopic() {
+    this.spinner = true;
     this.request.get(`/topic/${this.topic.id}`)
       .then(res => {
-        console.log(res);
-        this.ngZone.run(() => this.topic = res);
+        this.ngZone.run(() => Object.assign(this.topic, res));
       })
+      .finally(() => this.spinner = false);
   }
 
 }
