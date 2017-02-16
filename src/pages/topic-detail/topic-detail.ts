@@ -40,7 +40,9 @@ export class TopicDetailPage {
       .then(res => {
         this.ngZone.run(() => Object.assign(this.topic, res));
       })
-      .finally(() => this.spinner = false);
+      .finally(() => {
+        this.ngZone.run(() => this.spinner = false);
+      });
   }
 
 }

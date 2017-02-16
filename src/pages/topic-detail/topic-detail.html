@@ -24,6 +24,7 @@
     </div>
     <div class="markdown-body" [innerHTML]="topic.content | link"></div>
   </div>
+  <!-- *ngIf="spinner" -->
   <div class="spinner-box" *ngIf="spinner">
     <ion-spinner color="primary"></ion-spinner>
     <p>加载中...</p>

@@ -1,5 +1,9 @@
 page-topic-detail {
   .spinner-box{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +15,7 @@ page-topic-detail {
     .badge-md {
       transform: translateY(-75%);
       background: none;
-      color: $primary;
+      color: #fff;
       padding: 0;
     }
   }
@@ -110,10 +114,11 @@ page-topic-detail {
     &.footer-md:before{
       background-image: none;
     }
-    .button {
+    .button-md {
       width: 50%;
       margin: 0;
       border-radius: 0;
+      height: 4rem;
       &:first-child {
         border-right: 1px solid #e4e4e4;
       }

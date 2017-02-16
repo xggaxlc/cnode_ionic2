@@ -55,6 +55,9 @@ $item-md-avatar-size: 50px;
   padding-right: 0px !important;
 }
 
+$toolbar-md-height: 48px;
+$tabs-md-tab-min-height: 4.8rem;
+
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
@@ -73,6 +76,7 @@ $item-md-avatar-size: 50px;
 $refresher-icon-color: $primary;
 $refresher-text-color: $primary;
 $infinite-scroll-loading-color: #494949;
+$toolbar-background: $primary;
 
 // Ionicons
 // --------------------------------------------------
