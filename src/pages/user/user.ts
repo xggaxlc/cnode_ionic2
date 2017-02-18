@@ -19,6 +19,7 @@ export class UserPage {
   topicCollect: any;
   message: any;
   self: boolean;
+  transition: boolean = true;
   tab: string = 'reply';
 
   constructor(
@@ -42,7 +43,7 @@ export class UserPage {
   }
 
   ionViewWillLeave() {
-    this.utils.transition({ direction: 'right' });
+    this.transition && this.utils.transition({ direction: 'right' });
   }
 
   init() {
@@ -70,9 +71,10 @@ export class UserPage {
   }
 
   navToDetailPage(topic) {
+    this.transition = false;
     this.navCtrl.push(TopicDetailPage, {
       topic: Object.assign({}, topic, { content: '' })
-    }, { animate: false });
+    }, { animate: false }, () => this.transition = false);
   }
 
   logout() {
