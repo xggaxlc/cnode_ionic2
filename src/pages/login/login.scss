@@ -1,0 +1,19 @@
+page-login{
+  .logo{
+    display: block;
+    width: 200px;
+    margin: 50px auto;
+  }
+  .btn-login, .btn-scan{
+    font-size: 2rem;
+    height: 4rem;
+  }
+  .btn-login{
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  ion-footer{
+    color: #9b9b9b;
+    font-size: 12px;
+  }
+}

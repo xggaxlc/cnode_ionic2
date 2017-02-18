@@ -69,7 +69,8 @@ export class TopicListPage {
   }
 
   navToProfilePage() {
-    this.nav.push( this.auth.isLogin() ? UserPage : LoginPage );
+    let page = this.auth.isLogin() ? UserPage : LoginPage;
+    this.nav.push(page, {}, { animate: false });
   }
 
   fetchTopic(opts: FetchTopicOpts = {}): Q.Promise<any>  {

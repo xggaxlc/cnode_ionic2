@@ -70,40 +70,4 @@ export class Utils {
     alert.present();
   }
 
-  showLoading(content: string): any {
-    let loader = this.loadingCtrl.create({
-      content: content
-    });
-    loader.present();
-    return loader;
-  }
-
-  showToast(opts): void {
-    let options = {
-      message: '通知',
-      duration: 3000,
-      position: 'center'
-    }
-    Object.assign(options, opts);
-    try{
-      Toast.showWithOptions(options).subscribe(toast => {
-        console.log('toast', toast)
-      });
-    } catch(e) {
-      let toast = this.toastCtrl.create(options);
-      toast.present();
-    }
-  }
-
-  showAlert(opts): void {
-    let options = {
-      title: '错误',
-      subTitle: '有错误',
-      buttons: ['知道了']
-    }
-    Object.assign(options, opts);
-    let alert = this.alertCtrl.create(options);
-    alert.present();
-  }
-
 }

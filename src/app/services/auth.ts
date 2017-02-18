@@ -21,7 +21,7 @@ export class Auth {
   }
   
   isLogin(): boolean {
-    if (!this.userInfo.accessToken || !this.userInfo.loginname || !this.userInfo.id) {
+    if (!this.userInfo.token || !this.userInfo.loginname || !this.userInfo.id) {
       return false;
     }
     return true;

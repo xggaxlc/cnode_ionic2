@@ -8,6 +8,9 @@ import { LoadingController, NavController } from 'ionic-angular';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+
+  token: string;
+
   constructor(
     private auth: Auth,
     private utils: Utils,
@@ -15,6 +18,14 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     private navCtrl: NavController
   ) {}
+
+  ionViewDidLoad() {
+    this.utils.transition({ direction: 'left' });
+  }
+
+  ionViewWillLeave() {
+    this.utils.transition({ direction: 'right' });
+  }
   
   scan() {
     this.utils.scan()
@@ -22,15 +33,23 @@ export class LoginPage {
   }
 
   login(token) {
+    if (!token) return;
     let loader = this.loadingCtrl.create({
       content: '登录中...'
     });
     loader.present();
     this.request.post('accesstoken', { accesstoken: token })
       .then(data => {
-        let userInfo = Object.assign(data, { token: token });
-        this.auth.saveUserInfo(userInfo);
+        delete data.success;
+        return this.auth.saveUserInfo(data);
       })
+      .then(() => {
+        this.utils.toast({
+          message: '登陆成功'
+        });
+        this.navCtrl.canGoBack() && this.navCtrl.pop({ animate: false });
+      })
+      .catch(err => console.log(err))
       .finally(() => loader.dismiss());
   }
 }

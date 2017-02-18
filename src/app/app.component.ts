@@ -1,8 +1,11 @@
+import { LoginPage } from './../pages/login/login';
+import { Auth } from './services/auth';
 import { Utils } from './services/utils';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, IonicApp, Config, Keyboard } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   template: `<ion-nav #rootNav [root]="rootPage"></ion-nav>`
@@ -11,11 +14,13 @@ export class MyApp {
   @ViewChild('rootNav') nav: Nav;
 
   rootPage = TabsPage;
+  subscription: Subscription;
   backButtonPressedOnceToExit: boolean = false;
 
   constructor(
     platform: Platform,
     config: Config,
+    private auth: Auth,
     private utils: Utils,
     private IonicApp: IonicApp,
     private Keyboard: Keyboard
@@ -63,6 +68,19 @@ export class MyApp {
         }
       }, 101);
     });
+  }
+
+  ngOnInit() {
+    this.subscription = this.auth.requireLoginSource.asObservable().subscribe(() => {
+      //当前导航不在LoginPage 才需要push到LoginPage
+      if (this.nav.getActive().instance && !(this.nav.getActive().instance instanceof LoginPage)) {
+        this.nav.push(LoginPage, {}, { animate: false });
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   pressTwiceToExit() {

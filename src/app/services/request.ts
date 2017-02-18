@@ -14,15 +14,15 @@ export class Request {
   }
   private timeout: number = 10000;
   constructor(
-    private Utils: Utils,
-    private Auth: Auth
+    private utils: Utils,
+    private auth: Auth
   ) {}
 
   private getAndDelete(method: RequestMethod, api: string, params: any, header: {}, cb?: Function): Q.Promise < any > {
     return Q.Promise((resolve, reject) => {
       let req = Superagent[method](`${this.baseUrl}/${api}`)
         .set(Object.assign(this.header, header))
-        .query(params)
+        .query(Object.assign(params, { accesstoken: this.auth.userInfo.token }))
         .timeout(this.timeout)
         .end((err, res) => {
           if (err) {
@@ -41,7 +41,7 @@ export class Request {
     return Q.Promise((resolve, reject) => {
       let req = Superagent[method](`${this.baseUrl}/${api}`)
         .set(Object.assign(this.header, header))
-        .send(body)
+        .send(Object.assign(body, { accesstoken: this.auth.userInfo.token }))
         .timeout(this.timeout)
         .end((err, res) => {
           if (err) {
@@ -58,7 +58,7 @@ export class Request {
 
   handleResponse(res): Q.Promise<any> {
     if (res.success) {
-      return res.data;
+      return res.data || res;
     } else {
       Q.reject({
         error: { status: -200 },
@@ -73,62 +73,33 @@ export class Request {
   
     if (error.timeout) {
       //请求超时
-      this.Utils.toast({
+      this.utils.toast({
         message: '网络不给力，请求超时'
       });
     }
   
-    if (err.status) {
+    if (error.status) {
+      let alert = {
+        message: response.error_msg,
+        title: '错误',
+        buttons: ['关闭']
+      }
       switch(error.status) {
-        //自定义错误
-        case -200:
-          this.Utils.alert({
-            title: '通知',
-            message: response.error_msg,
-            buttons: ['知道了']
-          });
-          break;
         case -1:
-          this.Utils.alert({
-            title: '通知',
-            message: '请检查你的网络然后重试',
-            buttons: ['好的']
-          });
-          break;
-        case 400:
-          this.Utils.alert({
-            title: '400',
-            message: response.error_msg,
-            buttons: ['知道了']
-          });
+          alert.message = '请检查你的网络然后重试';
           break;
         case 401:
-          this.Utils.toast({
-            message: response.error_msg || '请登录'
-          });
-          this.Auth.requireLogin();
+          alert.message = response.error_msg || '请登录';
+          this.auth.requireLogin();
           break;
         case 403: 
-          this.Utils.alert({
-            title: '403',
-            message: response.error_msg || '你没有权限获取这条数据或者执行这个操作',
-            buttons: ['知道了']
-          });
+          alert.message = response.error_msg || '你没有权限获取这条数据或者执行这个操作';
           break;
         case 404:
-          this.Utils.alert({
-            title: '404',
-            message: response.error_msg || '没有这条数据',
-            buttons: ['知道了']
-          });
+          alert.message = response.error_msg || '没有这条数据';
           break;
-        default:
-          this.Utils.alert({
-            title: error.stauts,
-            message: response.error_msg || error,
-            buttons: ['知道了']
-          });
       }
+      this.utils.alert(alert);
     }
     return Q.reject(err);
   }
