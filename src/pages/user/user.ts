@@ -3,7 +3,7 @@ import { Request } from './../../app/services/request';
 import { Utils } from './../../app/services/utils';
 import { Auth } from './../../app/services/auth';
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import * as Q from 'q';
 @Component({
   selector: 'page-user',
@@ -29,6 +29,7 @@ export class UserPage {
     private navCtrl: NavController,
     private ngZone: NgZone,
     private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -75,9 +76,25 @@ export class UserPage {
   }
 
   logout() {
-    this.auth.clearUserInfo()
-      .then(() => {
-        this.navCtrl.canGoBack() && this.navCtrl.pop({ animate: false });
-      });
+    let alert = this.alertCtrl.create({
+      title: '退出登陆',
+      message: '你确定退出登录?',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel'
+        },
+        {
+          text: '确定',
+          handler: () => {
+            this.auth.clearUserInfo()
+              .then(() => {
+                this.navCtrl.canGoBack() && this.navCtrl.pop({ animate: false });
+              });
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }
