@@ -74,7 +74,7 @@ export class UserPage {
     this.transition = false;
     this.navCtrl.push(TopicDetailPage, {
       topic: Object.assign({}, topic, { content: '' })
-    }, { animate: false }, () => this.transition = false);
+    }, { animate: false }, () => this.transition = true);
   }
 
   logout() {
