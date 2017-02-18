@@ -22,7 +22,7 @@ export class Request {
     return Q.Promise((resolve, reject) => {
       let req = Superagent[method](`${this.baseUrl}/${api}`)
         .set(Object.assign(this.header, header))
-        .query(Object.assign(params, { accesstoken: this.auth.userInfo.token }))
+        .query(Object.assign({ accesstoken: this.auth.userInfo.token }, params))
         .timeout(this.timeout)
         .end((err, res) => {
           if (err) {
@@ -41,7 +41,7 @@ export class Request {
     return Q.Promise((resolve, reject) => {
       let req = Superagent[method](`${this.baseUrl}/${api}`)
         .set(Object.assign(this.header, header))
-        .send(Object.assign(body, { accesstoken: this.auth.userInfo.token }))
+        .send(Object.assign({ accesstoken: this.auth.userInfo.token }, body))
         .timeout(this.timeout)
         .end((err, res) => {
           if (err) {

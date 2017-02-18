@@ -1,3 +1,4 @@
+import { TopicItem } from './../pages/topic-list/item/item';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -24,6 +25,7 @@ export function provideStorage() {
   declarations: [
     MyApp,
     TabsPage,
+    TopicItem,
     TopicListPage,
     TopicDetailPage,
     LoginPage,
@@ -43,6 +45,7 @@ export function provideStorage() {
   entryComponents: [
     MyApp,
     TabsPage,
+    TopicItem,
     TopicListPage,
     TopicDetailPage,
     LoginPage,

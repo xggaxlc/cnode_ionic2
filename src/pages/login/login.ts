@@ -40,6 +40,7 @@ export class LoginPage {
     loader.present();
     this.request.post('accesstoken', { accesstoken: token })
       .then(data => {
+        Object.assign(data, { token: token })
         delete data.success;
         return this.auth.saveUserInfo(data);
       })

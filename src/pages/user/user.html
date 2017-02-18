@@ -1,8 +1,54 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>用户</ion-title>
+    <ion-buttons end *ngIf="self">
+      <button ion-button icon-only (click)="logout()">
+        <ion-icon name="lock"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  user
+  <div class="user-info" *ngIf="onOff.user">
+    <div class="inner">
+      <img src="{{user.avatar_url | protocol}}" alt="avatar">
+      <p class="name">{{user.loginname}}</p>
+      <p class="score">积分：{{user.score}}</p>
+      <p class="create_at">创建于：{{user.create_at | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+      <p class="github" *ngIf="user.githubUsername">
+        <ion-icon name="logo-github"></ion-icon>
+        <a class="github" href="https://github.com/{{user.githubUsername}}">
+          https://github.com/{{user.githubUsername}}
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class="segment" *ngIf="onOff.user">
+    <ion-segment [(ngModel)]="tab">
+      <ion-segment-button value="reply">
+        最近回复
+      </ion-segment-button>
+      <ion-segment-button value="pub">
+        最近发布
+      </ion-segment-button>
+      <ion-segment-button value="collect" (click)="getCollect()">
+        话题收藏
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="tab">
+      <ion-list *ngSwitchCase="'reply'">
+        <app-topic-item *ngFor="let item of user.recent_replies" [topic]="item" [mini]="true" (onClick)="navToDetailPage(item)"></app-topic-item>
+      </ion-list>
+      <ion-list *ngSwitchCase="'pub'">
+        <app-topic-item *ngFor="let item of user.recent_topics" [topic]="item" [mini]="true" (onClick)="navToDetailPage(item)"></app-topic-item>
+      </ion-list>
+      <ion-list *ngSwitchCase="'collect'">
+        <div class="spinner-box" *ngIf="!onOff.collect">
+          <ion-spinner color="primary"></ion-spinner>
+          <p>加载中...</p>
+        </div>
+        <app-topic-item *ngFor="let item of topicCollect" [topic]="item" (onClick)="navToDetailPage(item)"></app-topic-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
