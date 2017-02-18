@@ -32,7 +32,12 @@ export function provideStorage() {
     ProtocolPipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      mode: 'md',
+      pageTransition: 'ios',
+      // backButtonText: '返回',
+      swipeBackEnabled: false
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

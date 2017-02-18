@@ -65,7 +65,7 @@ export class TopicListPage {
   navToDetailPage(topic) {
     this.nav.push(TopicDetailPage, {
       topic: Object.assign({}, topic, { content: '' })
-    });
+    }, { animate: false });
   }
 
   navToProfilePage() {

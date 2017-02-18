@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { LoadingController, ToastController, AlertController, ToastOptions, AlertOptions } from 'ionic-angular';
 import { Toast, BarcodeScanner } from 'ionic-native';
 import Q from 'q';
+import { NativePageTransitions, NativeTransitionOptions } from 'ionic-native';
+
+type TransitionAction = 'slide' | 'flip' | 'fade' | 'drawer' | 'curl';
+
 @Injectable()
 export class Utils {
   constructor(
@@ -9,6 +13,26 @@ export class Utils {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
   ) {}
+
+  transition (opts: NativeTransitionOptions = {}, action: TransitionAction = 'slide'): Q.Promise<any> {
+    let defferd = Q.defer();
+    let options = {
+      direction         : 'left', // 'left|right|up|down', default 'left' (which is like 'next')
+      duration          :    300, // in milliseconds (ms), default 400
+      slowdownfactor    :      4, // overlap views (higher number is more) or no overlap (1). -1 doesn't slide at all. Default 4
+      slidePixels       :     -1, // optional, works nice with slowdownfactor -1 to create a 'material design'-like effect. Default not set so it slides the entire page.
+      iosdelay          :    70, // ms to wait for the iOS webview to update before animation kicks in, default 60
+      androiddelay      :    80, // same as above but for Android, default 70
+      winphonedelay     :    250, // same as above but for Windows Phone, default 200,
+      fixedPixelsTop    :      0, // the number of pixels of your fixed header, default 0 (iOS and Android)
+      fixedPixelsBottom :      0  // the number of pixels of your fixed footer (f.i. a tab bar), default 0 (iOS and Android)
+    }
+    Object.assign(options, opts);
+    NativePageTransitions[action](options)
+      .then(msg => defferd.resolve(msg))
+      .catch(err => defferd.reject(err));
+    return defferd.promise;
+  }
 
   scan(): Q.Promise<any> {
     let defferd = Q.defer();
@@ -80,13 +104,6 @@ export class Utils {
     Object.assign(options, opts);
     let alert = this.alertCtrl.create(options);
     alert.present();
-  }
-
-  finally(promise: Promise<any>, cb: Function) {
-    return promise.then(
-      value  => Promise.resolve(cb()).then(() => value),
-      reason => Promise.resolve(cb()).then(() => { throw reason })
-    );
   }
 
 }

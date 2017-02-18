@@ -1,6 +1,8 @@
+import { Utils } from './../../app/services/utils';
 import { Component, ViewChild, NgZone, ElementRef } from '@angular/core';
 import { NavController, Content, NavParams } from 'ionic-angular';
 import { Request } from '../../app/services/request';
+
 @Component({
   selector: 'page-topic-detail',
   templateUrl: 'topic-detail.html'
@@ -17,12 +19,17 @@ export class TopicDetailPage {
     private navCtrl: NavController,
     private request: Request,
     private ngZone: NgZone,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private utils: Utils
   ) {}
 
   ionViewDidLoad() {
-    console.log(this.topic)
     this.fetchTopic();
+    this.utils.transition({ direction: 'left' });
+  }
+
+  ionViewWillLeave() {
+    this.utils.transition({ direction: 'right' });
   }
 
   scrollToTop(): Promise<any> {
