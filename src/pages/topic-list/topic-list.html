@@ -14,7 +14,7 @@
     <ion-refresher-content
       pullingIcon="arrow-down"
       pullingText="下拉刷新..."
-      refreshingSpinner="bubbles"
+      refreshingSpinner="circles"
       refreshingText="正在刷新..."
     >
     </ion-refresher-content>
@@ -43,7 +43,7 @@
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)" [hidden]="onOff.loadMoreByUser || !onOff.canLoadMore" [enabled]="onOff.canLoadMore">
     <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
+      loadingSpinner="circles"
       loadingText="加载中...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
