@@ -91,10 +91,18 @@ page-topic-detail {
             align-items: center;
           }
           .right{
-            color: #9b9b9b;
+            .btn-up{
+              color: #9b9b9b;
+              &.has-up{
+                color: #42bd56;
+              }
+            }
             font-size: 14px;
             ion-icon{
-              margin-right: 6px;
+              padding-right: 0;
+            }
+            .up-length{
+              margin-left: 3px;
             }
           }
         }

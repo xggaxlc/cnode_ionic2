@@ -43,8 +43,11 @@
               <p class="time">{{item.create_at}}</p>
             </div>
           </div>
-          <div class="right" [hidden]="!item.ups.length">
-            <ion-icon name="thumbs-up"></ion-icon><span>{{item.ups.length}}</span>
+          <div class="right">
+            <button ion-button icon-left clear (click)="up(item)" class="btn-up" [ngClass]="{'has-up': item.ups.indexOf(userInfo.id) !== -1}">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <span *ngIf="item.ups.length" class="up-length">{{item.ups.length}}</span>
+            </button>
           </div>
         </div>
         <div class="body">
@@ -54,10 +57,10 @@
     </ion-list>
   </div>
 </ion-content>
-<ion-footer>
-  <button ion-button icon-left clear>
-    <ion-icon name="heart-outline"></ion-icon>
-    收藏
+<ion-footer *ngIf="topic.replies">
+  <button ion-button icon-left clear (click)="collect()">
+    <ion-icon name="{{topic.is_collect ? 'heart' : 'heart-outline'}}" color="{{topic.is_collect ? 'danger' : 'light'}}"></ion-icon>
+    {{topic.is_collect ? '已收藏' : '收藏'}}
   </button>
   <button ion-button icon-left clear>
     <ion-icon name="chatboxes"></ion-icon>
