@@ -1,3 +1,4 @@
+import { MomentPipe } from './pipes/moment';
 import { TopicItem } from './../pages/topic-list/item/item';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -31,7 +32,8 @@ export function provideStorage() {
     LoginPage,
     UserPage,
     LinkPipe,
-    ProtocolPipe
+    ProtocolPipe,
+    MomentPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

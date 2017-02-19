@@ -7,7 +7,7 @@
     <ion-badge color="primary" *ngIf="topic.top">置顶</ion-badge>
     <ion-badge color="danger" *ngIf="topic.good">精华</ion-badge>
   </div>
-  <p class="time"  [hidden]="mini">{{topic.create_at}}</p>
+  <p class="time"  [hidden]="mini">{{topic.create_at | moment: 'fromNow'}}</p>
   <h3 class="title">{{topic.title}}</h3>
   <p class="mata" [hidden]="mini">
     <span><ion-icon name="eye"></ion-icon><span>{{topic.visit_count}}</span></span>

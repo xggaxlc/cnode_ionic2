@@ -19,7 +19,7 @@
       <img src="{{topic.author.avatar_url | protocol}}">
       <div class="info">
         <p class="name">{{topic.author.loginname}}</p>
-        <p>{{topic.create_at}}</p>
+        <p>{{topic.create_at | moment: 'fromNow'}}</p>
       </div>
     </div>
     <div class="markdown-body" [innerHTML]="topic.content | link"></div>
@@ -40,7 +40,7 @@
             </ion-avatar>
             <div class="info">
               <p class="name">{{item.author.loginname}}</p>
-              <p class="time">{{item.create_at}}</p>
+              <p class="time">{{item.create_at | moment: 'fromNow'}}</p>
             </div>
           </div>
           <div class="right">
