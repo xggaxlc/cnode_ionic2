@@ -4,15 +4,17 @@ page-login{
     width: 200px;
     margin: 50px auto;
   }
-  .btn-login, .btn-scan{
-    font-size: 2rem;
-    height: 4rem;
-  }
-  .btn-login{
+  .btn-group{
+    display: flex;
+    justify-content: space-between;
     margin-top: 16px;
-    margin-bottom: 16px;
+    .btn-login, .btn-scan{
+      font-size: 2rem;
+      height: 4rem;
+      width: 45%;
+    }
   }
-  ion-footer{
+  .info{
     color: #9b9b9b;
     font-size: 12px;
   }

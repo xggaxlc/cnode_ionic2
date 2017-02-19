@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>板块</ion-label>
+      <ion-select [(ngModel)]="topic.tab" cancelText="取消" okText="确定">
+        <ion-option value="">请选择</ion-option>
+        <ion-option value="share">分享</ion-option>
+        <ion-option value="ask">问答</ion-option>
+        <ion-option value="job">招聘</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="标题字数10字以上" [(ngModel)]="topic.title"></ion-input>
+    </ion-item>
+  </ion-list>
+  <app-editor></app-editor>
+</ion-content>

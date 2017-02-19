@@ -3,7 +3,7 @@ import { Auth } from './services/auth';
 import { Utils } from './services/utils';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, IonicApp, Config, Keyboard } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Splashscreen } from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -28,7 +28,6 @@ export class MyApp {
     platform.ready().then(() => {
       // 关闭splash
       Splashscreen.hide();
-      StatusBar.show();
       // 监听安卓物理返回按键
       let ready = true;
       platform.registerBackButtonAction(() => {

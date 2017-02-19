@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>回复</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="reply()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <app-editor [value]="initValue"></app-editor>
+</ion-content>

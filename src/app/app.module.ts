@@ -1,3 +1,6 @@
+import { AddTopicPage } from './../pages/topic-add/topic-add';
+import { ComponentEditor } from './../pages/reply/editor/editor';
+import { ReplyPage } from './../pages/reply/reply';
 import { MomentPipe } from './pipes/moment';
 import { TopicItem } from './../pages/topic-list/item/item';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -29,8 +32,11 @@ export function provideStorage() {
     TopicItem,
     TopicListPage,
     TopicDetailPage,
+    AddTopicPage,
     LoginPage,
     UserPage,
+    ReplyPage,
+    ComponentEditor,
     LinkPipe,
     ProtocolPipe,
     MomentPipe
@@ -50,8 +56,11 @@ export function provideStorage() {
     TopicItem,
     TopicListPage,
     TopicDetailPage,
+    AddTopicPage,
     LoginPage,
     UserPage,
+    ReplyPage,
+    ComponentEditor
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

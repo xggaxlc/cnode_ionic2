@@ -5,17 +5,17 @@
 </ion-header>
 <ion-content padding>
   <img class="logo" src="./assets/image/cnodejs.svg">
+  <p class="info">PC端登录cnode.org后，扫描设置页面的Access Token二维码或者手动输入Access Token即可完成登录。</p>
   <form (submit)="login(token)">
     <ion-item>
       <ion-input type="text" placeholder="手动输入Access Token" name="token" [(ngModel)]="token"></ion-input>
     </ion-item>
-    <button type="submit" ion-button full color="primary" class="btn-login">登录</button>
-    <button type="button" ion-button full color="secondary" class="btn-scan" icon-right (click)="scan()">
-      扫码登陆
-      <ion-icon name="qr-scanner"></ion-icon>
-    </button>
+    <div class="btn-group">
+      <button type="submit" ion-button full color="primary" class="btn-login">登录</button>
+      <button type="button" ion-button full color="secondary" class="btn-scan" icon-right (click)="scan()">
+        扫码登陆
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </div>
   </form>
 </ion-content>
-<ion-footer padding>
-  PC端登录cnode.org后，扫描设置页面的Access Token二维码或者手动输入Access Token即可完成登录。
-</ion-footer>

@@ -94,4 +94,8 @@ $toolbar-background: $primary;
 
 
 // css
+@import "../assets/css/simplemde.min";
 @import "../assets/css/github-markdown";
+.markdown-inner-user-link{
+  color: $primary !important;
+}

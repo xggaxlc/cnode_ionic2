@@ -1,0 +1,9 @@
+app-editor{
+  .editor-toolbar{
+    border-top: none;
+  }
+  .editor-toolbar, .CodeMirror{
+    border-radius: 0;
+    border-color: #e4e4e4;
+  }
+}

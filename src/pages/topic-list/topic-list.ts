@@ -1,5 +1,6 @@
+import { AddTopicPage } from './../topic-add/topic-add';
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Nav, LoadingController, NavParams, Content } from 'ionic-angular';
+import { Nav, LoadingController, NavParams, Content, Events } from 'ionic-angular';
 import { Request } from '../../app/services/request';
 import { Utils } from '../../app/services/utils';
 import { Auth } from '../../app/services/auth';
@@ -42,20 +43,27 @@ export class TopicListPage {
   }
 
   constructor(
-    public nav: Nav,
+    private nav: Nav,
     private loadingCtrl: LoadingController,
     private request: Request,
     private utils: Utils,
     private auth: Auth,
     private ngZone: NgZone,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private events: Events
   ) {}
 
   ionViewDidLoad() {
     this.fetchTopic({
       refresh: true,
       loadingMessage: '加载中...'
-    });   
+    });
+    this.events.subscribe('topic:created', () => {
+      this.fetchTopic({
+        refresh: true,
+        loadingMessage: '刷新中...'
+      });
+    });
   }
 
   scrollToTop(): Promise<any> {
@@ -70,6 +78,11 @@ export class TopicListPage {
 
   navToProfilePage() {
     let page = this.auth.isLogin() ? UserPage : LoginPage;
+    this.nav.push(page, {}, { animate: false });
+  }
+
+  navToAddTopicPage() {
+    let page = this.auth.isLogin() ? AddTopicPage : LoginPage;
     this.nav.push(page, {}, { animate: false });
   }
 

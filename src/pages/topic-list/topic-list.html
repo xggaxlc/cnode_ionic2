@@ -2,6 +2,9 @@
   <ion-navbar>
     <ion-title (click)="scrollToTop()">{{title}}</ion-title>
     <ion-buttons end>
+      <button ion-button icon-only (click)="navToAddTopicPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="navToProfilePage()">
         <ion-icon name="person"></ion-icon>
       </button>

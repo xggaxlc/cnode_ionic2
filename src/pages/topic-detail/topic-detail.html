@@ -2,6 +2,9 @@
   <ion-navbar>
     <ion-title (click)="scrollToTop()">主题详情</ion-title>
     <ion-buttons end>
+      <button ion-button icon-only *ngIf="auth.isLogin() && userInfo.id === topic.author_id" (click)="navToUpdateTopicPage()">
+        <ion-icon name="ios-create"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="scrollToReply()">
         <ion-icon name="chatboxes"></ion-icon>
         <ion-badge [hidden]="!topic.reply_count">{{topic.reply_count}}</ion-badge>
@@ -15,7 +18,7 @@
 <ion-content #content>
   <div class="topic" padding>
     <h2 class="title">{{topic.title}}</h2>
-    <div class="mata">
+    <div class="mata" (click)="navToUserPage(topic.author.loginname)">
       <img src="{{topic.author.avatar_url | protocol}}">
       <div class="info">
         <p class="name">{{topic.author.loginname}}</p>
@@ -32,19 +35,19 @@
   <div class="reply" #reply [hidden]="!topic.reply_count || !topic.replies">
     <div class="title" padding>回复&nbsp;{{topic.reply_count}}</div>
     <ion-list class="list">
-      <ion-item *ngFor="let item of topic.replies" padding>
+      <ion-item *ngFor="let item of topic.replies" (click)="replyToUser(item, $event)" padding>
         <div class="header">
           <div class="left">
-            <ion-avatar item-left>
+            <ion-avatar item-left (click)="navToUserPage(item.author.loginname, $event)">
               <img src="{{item.author.avatar_url | protocol}}">
             </ion-avatar>
-            <div class="info">
+            <div class="info" (click)="navToUserPage(item.author.loginname, $event)">
               <p class="name">{{item.author.loginname}}</p>
               <p class="time">{{item.create_at | moment: 'fromNow'}}</p>
             </div>
           </div>
           <div class="right">
-            <button ion-button icon-left clear (click)="up(item)" class="btn-up" [ngClass]="{'has-up': item.ups.indexOf(userInfo.id) !== -1}">
+            <button ion-button icon-left clear (click)="up(item, $event)" class="btn-up" [ngClass]="{'has-up': item.ups.indexOf(userInfo.id) !== -1}">
               <ion-icon name="thumbs-up"></ion-icon>
               <span *ngIf="item.ups.length" class="up-length">{{item.ups.length}}</span>
             </button>
@@ -62,7 +65,7 @@
     <ion-icon name="{{topic.is_collect ? 'heart' : 'heart-outline'}}" color="{{topic.is_collect ? 'danger' : 'light'}}"></ion-icon>
     {{topic.is_collect ? '已收藏' : '收藏'}}
   </button>
-  <button ion-button icon-left clear>
+  <button ion-button icon-left clear (click)="navToReplyPage()">
     <ion-icon name="chatboxes"></ion-icon>
     回复
   </button>
