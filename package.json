@@ -2,7 +2,7 @@
   "name": "cnode",
   "author": "duwei",
   "homepage": "",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "scripts": {
     "clean": "ionic-app-scripts clean",

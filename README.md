@@ -1,20 +1,23 @@
-Ionic 2 App Base
+CNodejs app powered by ionic2
 =====================
-
-This is the base template for Ionic 2 starter apps.
 
 ## Using this project
 
-You'll need the Ionic CLI with support for v2 apps:
-
 ```bash
 $ npm install -g ionic
+$ git clone
+$ npm install
+# serve browser
+$ ionic serve
+# add android platform
+$ ionic platform add android
+# run android
+$ ionic run android 
+# run android production
+$ ionic run android --prod
 ```
 
-Then run:
+## icon && splash
+https://github.com/AlexDisler/cordova-icon
 
-```bash
-$ ionic start myApp
-```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/docs/v2/getting-started/) page.
+https://github.com/AlexDisler/cordova-splash
