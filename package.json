@@ -1,9 +1,9 @@
 {
-  "name": "cnode",
+  "name": "cnodejs-ionic2",
   "author": "duwei",
-  "homepage": "",
+  "homepage": "https://github.com/xggaxlc/cnode_ionic2",
   "private": false,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
