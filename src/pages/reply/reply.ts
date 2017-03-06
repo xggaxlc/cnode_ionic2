@@ -45,6 +45,8 @@ export class ReplyPage implements OnInit {
     let loader = this.loadingCtrl.create({ content: '回复中...' });
     loader.present();
     let body: any = { content: content };
+    // 添加小尾巴
+    body.content += '\n 来自 [CNodeJS ionic2](https://github.com/xggaxlc/cnode_ionic2)';
     if (this.replyObj) {
       body.reply_id = this.replyObj.author.id
     }
@@ -53,7 +55,7 @@ export class ReplyPage implements OnInit {
         this.events.publish('reply:created');
         this.navCtrl.pop({ animate: false });
       })
-      .finally(() => loader.dismiss()); 
+      .finally(() => loader.dismiss());
   }
 
 }
