@@ -25,6 +25,9 @@ app-topic-item {
       .info {
         display: flex;
         justify-content: space-between;
+        .badges{
+          display: flex;
+        }
         ion-badge {
           width: 50px;
           height: 20px;
@@ -33,6 +36,10 @@ app-topic-item {
           font-size: 12px;
           font-weight: normal;
           padding: 0;
+          margin-right: 10px;
+          &:last-child{
+            margin-right: 0;
+          }
         }
       }
       .mata {
